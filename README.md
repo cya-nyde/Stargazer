@@ -1,2 +1,7 @@
 # Stargazer
-Desktop configuration/dotfile for Hyprland
+
+### by Cya-nyde
+
+- Desktop configuration/dotfile for Hyprland
+- Created for personal use
+- Not regularly updated
