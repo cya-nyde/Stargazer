@@ -25,7 +25,9 @@ cat <<"EOF"
 
 EOF
 
-sudo pacman -S yay hyprland uwsm kitty
+sudo pacman -S yay hyprland uwsm kitty curl
+
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 }
 
