@@ -12,23 +12,36 @@ cat <<"EOF"
 
 EOF
 
-function hyprInstall() {
-cat <<"EOF"
+ set -euo pipefail
+ IFS=$'\n\t'
 
+#Set Required Packages for Hyprland Environment
+ reqPkgs=(
+  "git"
+  "curl"
+  "wget"
+  "tar"
+  "gzip"
+  "unzip"
+  "kitty"
+  "hyprland"
+  "waybar"
+  "uwsm"
+  "rofi"
+  "swaync"
+  "pipewire"
+  "wireplumber"
+  "xdg-desktop-portal-hyprland"
+  "noto-fonts"
+  "nwg-look"
+  )
 
-  ___ ___                      .__                     .___ .___                 __         .__  .__   
- /   |   \ ___.__._____________|  | _____    ____    __| _/ |   | ____   _______/  |______  |  | |  |  
-/    ~    <   |  |\____ \_  __ \  | \__  \  /    \  / __ |  |   |/    \ /  ___/\   __\__  \ |  | |  |  
-\    Y    /\___  ||  |_> >  | \/  |__/ __ \|   |  \/ /_/ |  |   |   |  \\___ \  |  |  / __ \|  |_|  |__
- \___|_  / / ____||   __/|__|  |____(____  /___|  /\____ |  |___|___|  /____  > |__| (____  /____/____/
-       \/  \/     |__|                   \/     \/      \/           \/     \/            \/           
-
-EOF
-
-sudo pacman -S yay hyprland uwsm kitty curl
-
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-}
-
+for pkg in "${reqPkgs[@]}"; do
+  if ! pacman -Qi "$pkg" &>/dev/null; then
+    echo "Installing $pkg..."
+    sudo pacman -S --noconfirm "$pkg"
+  else
+    echo "$pkg is already installed."
+  fi
+done
 
